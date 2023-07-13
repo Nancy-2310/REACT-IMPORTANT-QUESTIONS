@@ -1,0 +1,462 @@
+1  Whats React and its pros and cons?
+
+React is a popular JavaScript library used for building user interfaces (UIs) in web applications. It follows the component-based architecture, where UIs are composed of reusable and self-contained components.
+React is known for its efficient rendering, virtual DOM manipulation, and declarative approach to building UIs.
+
+Pros of React:
+
+Component-Based Architecture: React allows developers to build UIs using components, which are modular, reusable, and self-contained. This promotes code reusability, modularity, and easier maintenance.
+
+Virtual DOM: React utilizes a virtual DOM, which is a lightweight representation of the actual DOM. This allows React to efficiently update and render only the necessary parts of the UI, resulting in better
+
+performance.
+
+Declarative Syntax: React uses a declarative syntax, where developers describe how the UI should look based on its state. This makes it easier to understand and reason about the code, as developers can focus on
+the desired output rather than the detailed manipulation of the DOM.
+
+One-Way Data Flow: React follows a unidirectional data flow, making it easier to track and manage the flow of data in an application. This helps in preventing unexpected side effects and simplifies debugging.
+
+Large Ecosystem and Community: React has a large and active community, with a vast ecosystem of libraries, tools, and resources available. This makes it easier to find support, learn, and leverage existing 
+solutions for various use cases.
+
+Cons of React:
+
+Learning Curve: React has a learning curve, especially for developers new to JavaScript frameworks or libraries. Understanding concepts like components, JSX syntax, and the React ecosystem may require some 
+initial effort.
+
+Tooling Complexity: The React ecosystem has a wide range of tools and build configurations, which can be overwhelming for beginners. Setting up a React project with the appropriate tooling may require additional configuration and understanding.
+
+JSX Syntax: JSX, the syntax used in React to define components, may feel unfamiliar to developers accustomed to traditional HTML templates. It requires learning the syntax and the JSX-specific rules for
+  rendering components.
+
+Frequent Updates: React releases updates regularly, which can sometimes introduce breaking changes. Staying up to date with the latest versions and managing the migration process can be a challenge for larger
+projects.
+
+Performance Considerations: While React's virtual DOM provides efficient rendering, improper use of React components or inefficient rendering logic can impact performance. Careful optimization may be required
+for complex or performance-critical applications.
+
+It's important to note that while React has its pros and cons, its popularity, large community support, and extensive ecosystem make it a widely adopted and versatile library for building dynamic and interactive
+  web applications.
+
+2 What do you understand by Virtual Dom?
+
+The Virtual DOM (Document Object Model) is a concept used in React and other JavaScript libraries/frameworks. It is an abstraction of the real DOM and serves as a lightweight representation of the actual HTML 
+DOM tree.
+
+The Virtual DOM works as follows:
+
+Virtual DOM Representation: When using React, instead of directly manipulating the real DOM, developers work with a virtual representation of the DOM, which is a JavaScript object tree.
+
+Reconciliation: When changes occur in the state or props of a React component, the entire virtual DOM tree is re-rendered. This process is known as reconciliation.
+
+Diffing Algorithm: After re-rendering the virtual DOM, React performs a diffing algorithm to identify the differences between the previous virtual DOM state and the new virtual DOM state.
+
+Update Patches: Based on the differences identified through the diffing algorithm, React creates a minimal set of update patches, which represent the changes needed to bring the real DOM in sync with the new 
+virtual DOM state.
+
+Efficient DOM Updates: Finally, React applies these update patches to the real DOM, selectively modifying only the necessary parts. This approach minimizes the number of actual DOM manipulations, resulting in
+better performance.
+
+The purpose of the Virtual DOM is to optimize the process of updating and rendering the UI. By using a virtual representation of the DOM, React can avoid unnecessary direct manipulations of the real DOM, which 
+can be computationally expensive. Instead, React performs an efficient diffing process to identify the minimal changes required and applies those changes to the real DOM, resulting in faster and more efficient
+updates.
+
+The Virtual DOM provides several benefits:
+
+Performance Optimization: By minimizing direct DOM manipulations and selectively updating only the necessary parts, the Virtual DOM reduces the performance overhead associated with frequent DOM updates.
+
+Easy Abstraction: The Virtual DOM provides a simpler abstraction for working with the UI. Developers can work with a JavaScript object tree, using familiar programming paradigms, without worrying about low-level
+DOM manipulation.
+
+Cross-Platform Consistency: The Virtual DOM helps in achieving consistent rendering across different platforms and browsers. React abstracts away the browser-specific differences in DOM APIs, ensuring a 
+consistent rendering behavior.
+
+Enhanced Development Experience: The Virtual DOM allows for a more productive development experience by enabling declarative UI updates and easier debugging. Developers can focus on describing how the UI should 
+look based on the state, rather than dealing with the details of manipulating the DOM.
+
+Overall, the Virtual DOM is a key feature of React that contributes to its efficiency, performance, and ease of use. It plays a significant role in React's ability to provide a fast and responsive user interface
+while maintaining a simplified programming model.
+
+3 Difference between Virtual Dom vs Real Dom.
+
+The key differences between the Virtual DOM and the Real DOM are as follows:
+
+Representation:
+Virtual DOM: The Virtual DOM is an abstraction or virtual representation of the actual HTML DOM. It is a lightweight JavaScript object tree that mirrors the structure of the real DOM.
+Real DOM: The Real DOM is the actual HTML DOM (Document Object Model) that represents the structure of the web page. It is the browser's internal representation of the HTML elements, their properties, and the
+relationships between them.
+Updates and Rendering:
+Virtual DOM: In the Virtual DOM, when changes occur in the state or props of a component, the entire virtual DOM tree is re-rendered. This involves creating a new virtual DOM tree and performing a diffing
+algorithm to identify the minimal changes needed.
+Real DOM: In the Real DOM, every time a change occurs, the entire DOM tree is updated. This involves modifying the specific nodes and their attributes directly.
+Performance:
+Virtual DOM: The Virtual DOM optimizes performance by minimizing direct manipulations of the real DOM. It performs a diffing algorithm to identify the minimal changes needed and selectively updates only those
+parts in the real DOM, resulting in better performance.
+Real DOM: The Real DOM can be slower because updating or modifying the DOM directly triggers layout calculations, style recalculations, and reflows. These operations can be computationally expensive, especially
+when there are frequent updates.
+Access and Manipulation:
+Virtual DOM: In the Virtual DOM, developers work with JavaScript objects representing the virtual DOM tree. They can easily access, modify, and update the virtual DOM using JavaScript methods and syntax.
+Real DOM: In the Real DOM, developers manipulate the actual HTML elements using JavaScript DOM APIs. Directly accessing and modifying the real DOM can be more cumbersome and requires knowledge of the specific
+DOM manipulation methods.
+Cross-Platform Consistency:
+Virtual DOM: The Virtual DOM helps achieve consistency in rendering across different platforms and browsers. React abstracts away the browser-specific differences in DOM APIs, ensuring a consistent rendering
+behavior.
+Real DOM: The Real DOM may have slight variations in behavior across different browsers and platforms due to differences in DOM implementations.
+Overall, the Virtual DOM provides a more efficient and optimized way to update and render the UI by minimizing direct manipulations of the real DOM. It helps improve performance, provides a simpler programming
+model, and contributes to a consistent rendering experience.
+
+4 What is component? Types of component?
+
+In the context of web development, a component is a self-contained and reusable building block that encapsulates a set of related functionalities, data, and UI elements. Components are a fundamental concept in
+front-end frameworks like React, Angular, and Vue.js. They allow developers to create modular, maintainable, and reusable code by breaking down the UI into smaller, manageable pieces.
+
+Types of Components:
+
+Functional Components:
+Functional components, also known as stateless components, are defined as JavaScript functions.
+They receive props as input and return JSX (JavaScript XML) to define the UI.
+Functional components are simple, easy to understand, and highly reusable. They are suitable for representing presentational or UI-focused components.
+Example (React):
+
+function Button(props) {
+  return <button onClick={props.onClick}>{props.label}</button>;
+}
+Class Components:
+Class components, also known as stateful components, are defined as JavaScript classes that extend a base component class.
+They have a render method that returns JSX, defining the UI based on the component's state and props.
+Class components have access to lifecycle methods and can manage their own state. They are suitable for complex components that require state management or lifecycle hooks.
+Example (React):
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  increment() {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={() => this.increment()}>Increment</button>
+      </div>
+    );
+  }
+}
+Presentational Components:
+Presentational components, also known as dumb components, focus on rendering the UI based on the provided props.
+They are concerned with how things look and receive data and callbacks from their parent components.
+Presentational components are typically stateless functional components and aim to be reusable and easy to test.
+Container Components:
+Container components, also known as smart components, are responsible for managing data and state.
+They orchestrate the flow of data and handle business logic.
+Container components often encapsulate multiple presentational components and pass data and callbacks to them as props.
+Higher-Order Components (HOCs):
+Higher-Order Components are functions that take a component as input and return an enhanced version of that component.
+HOCs enable code reuse and provide additional functionalities to components, such as handling authentication, managing state, or injecting data.
+They enhance the capabilities of a component without modifying its original source code.
+These are some common types of components used in front-end development. The choice of component type depends on the specific requirements of the application, the complexity of the component, and the level of 
+reusability and state management needed.
+
+
+5 Difference between class & function based component.
+
+Class-based components and function-based components are two different ways to define components in React. Here are the key differences between them:
+
+Class-Based Components:
+
+Syntax: Class-based components are defined as ES6 classes that extend the base React.Component class. They use the render() method to define the component's UI.
+State Management: Class-based components have built-in state management. They can define and update their own state using the setState() method. Class components are suitable for managing complex state and
+handling lifecycle methods.
+Lifecycle Methods: Class components have access to lifecycle methods such as componentDidMount(), componentDidUpdate(), and componentWillUnmount(). These methods allow developers to perform actions at specific
+points in the component's lifecycle.
+Binding: When using class components, you need to explicitly bind the this context for custom methods, such as event handlers, in the constructor or using arrow functions.
+Usage of this: Class components use the this keyword to refer to the component's instance and its properties and methods.
+Function-Based Components:
+
+Syntax: Function-based components are defined as JavaScript functions. They receive props as input and return JSX to define the component's UI.
+Simplicity: Function-based components are simpler and have a more concise syntax compared to class-based components. They focus on rendering UI based on the provided props.
+No State or Lifecycle Methods: Function-based components are stateless by default. They do not have built-in state management and cannot define lifecycle methods. However, with the introduction of React Hooks,
+function-based components can now manage state and use lifecycle-like methods through hooks like useState and useEffect.
+Performance: Function-based components are generally more lightweight and can offer better performance because they don't carry the additional overhead of a class.
+Usage of this: Function-based components do not use the this keyword since they don't have an instance. Instead, they access props directly as function parameters.
+In recent versions of React, function-based components have gained popularity due to the introduction of React Hooks. Hooks allow developers to manage state, use lifecycle-like methods, and handle other React
+features within function components, reducing the need for class components. However, class-based components are still widely used, especially in legacy codebases or for more complex scenarios where fine-grained
+control over state and lifecycle methods is required.
+
+6 Explain react component life cycle .
+
+In React, components have a lifecycle that consists of various stages, allowing developers to hook into specific moments during the component's existence. The component lifecycle can be divided into three main
+phases: Mounting, Updating, and Unmounting. Each phase has specific methods associated with it. Here's an overview of the React component lifecycle:
+
+Mounting Phase:
+This phase occurs when an instance of a component is being created and inserted into the DOM.
+
+constructor(): The constructor is the first method called when a component is created. It is used for initializing state and binding event handlers.
+
+static getDerivedStateFromProps(): This static method is called before rendering and allows the component to update its state based on changes in props. It returns an object to update the state or null to
+indicate no change.
+
+render(): The render method is responsible for returning JSX or null. It describes the UI of the component based on the current state and props.
+
+componentDidMount(): This method is invoked immediately after the component is mounted to the DOM. It is used for performing side effects, such as fetching data from an API or setting up subscriptions.
+
+Updating Phase:
+This phase occurs when a component is re-rendered due to changes in its props or state.
+
+static getDerivedStateFromProps(): This method can also be called during the updating phase, similar to the mounting phase.
+
+shouldComponentUpdate(): This method is invoked before re-rendering the component. It allows developers to control whether the component should re-render or not based on changes in props or state. By default, 
+it returns true.
+
+render(): The render method is called again to update the component's UI based on the updated state and props.
+
+getSnapshotBeforeUpdate(): This method is called right before the changes from the virtual DOM are reflected in the actual DOM. It allows the component to capture some information from the DOM, such as scroll
+position, before it gets updated.
+
+componentDidUpdate(): This method is called after the component is re-rendered. It is used for performing side effects, such as updating the DOM or interacting with external libraries.
+
+Unmounting Phase:
+This phase occurs when a component is being removed from the DOM.
+
+componentWillUnmount(): This method is called just before the component is unmounted and destroyed. It is used for cleaning up resources, canceling subscriptions, or removing event listeners.
+Other Lifecycle Methods:
+
+React also provides additional lifecycle methods that are less commonly used but can be helpful in specific scenarios:
+
+static getDerivedStateFromError(): This method is used in error boundaries to handle errors during rendering. It allows the component to update its state in response to an error in its child components.
+
+componentDidCatch(): This method is used in error boundaries to catch and handle errors thrown by child components during rendering.
+
+shouldComponentUpdate(): This method can be used to optimize performance by preventing unnecessary re-renders when the component's props or state haven't changed.
+
+React 17 and Beyond:
+
+With React 17, some lifecycle methods have been deprecated or have limited usage. The focus is now on using function components and React Hooks for managing state and performing side effects.
+It's important to note that the React team recommends using function components and hooks whenever possible, as they provide a simpler and more consistent way of handling component lifecycles. Class-based 
+components and the associated lifecycle methods are still supported but may be deprecated in future versions of React.
+
+7 Explain Prop Drilling in React & Ways to avoid it.
+
+Prop drilling in React refers to the process of passing props through multiple intermediate components to reach a deeply nested component that actually needs the prop. It occurs when a component needs a prop 
+that is not directly available in its own props, but it has to receive the prop from its parent component and pass it down to its child components, even if the intermediate components don't need the prop 
+themselves.
+
+Prop drilling can lead to several issues:
+
+Code Complexity: Prop drilling can make the code more complex and harder to understand, as the props are passed through multiple layers of components.
+
+Maintenance Difficulty: When the structure or requirements of the component tree change, prop drilling can require updating and passing props in multiple places, making maintenance more challenging.
+
+Performance Impact: Unnecessary passing of props through intermediate components can impact performance, especially if the components are deeply nested or the props are large.
+
+To avoid prop drilling in React, you can use the following techniques:
+
+Context API: React's Context API allows you to create a context that provides a way to share data between components without explicitly passing props through each intermediate component. The data can be accessed
+by any component within the context's provider and consumed using the useContext hook or the Consumer component.
+
+React Redux: React Redux is a state management library that uses a centralized store to manage application state. It provides a way to access state and dispatch actions from any component within the Redux store, eliminating the need for prop drilling.
+
+Component Composition: Instead of passing props through multiple layers of components, you can create a higher-level component that encapsulates the logic and state related to the prop. The intermediate 
+components can then simply render the higher-level component, without the need to pass the prop explicitly.
+
+React Query/GraphQL: If you're using libraries like React Query or GraphQL, they often provide mechanisms to fetch and manage data at a higher level, allowing you to access the data in any component without
+prop drilling.
+
+By adopting these techniques, you can minimize or eliminate the need for prop drilling in your React application. This leads to cleaner code, better maintainability, and improved performance by reducing 
+unnecessary passing of props through intermediate components.
+
+8. Create a Counter Web App using React
+
+- Develop a web application using React that functions as a counter.
+- Include two buttons in the UI:
+    1. "Increment" button:
+        - On clicking this button, the counter value should be incremented by one.
+    2. "Decrement" button:
+        - On clicking this button, the counter value should be decremented by one.
+- Implement the counter logic using React's state management.
+- Ensure that the counter value is displayed in the UI and updates in real-time when incremented or decremented.
+- Use appropriate React components and hooks to manage the counter state and handle button click events.
+
+Sure! Here's an example of a Counter web app using React:
+
+import React, { useState } from 'react';
+
+function CounterApp() {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
+
+  const handleDecrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  );
+}
+
+export default CounterApp;
+In this example, we define a functional component called CounterApp. It uses the useState hook to manage the counter state. The initial state of the counter is set to 0.
+
+The handleIncrement function is called when the "Increment" button is clicked. It updates the counter state by incrementing the current count value by 1 using the setCount function provided by the useState hook.
+
+
+Similarly, the handleDecrement function is called when the "Decrement" button is clicked. It updates the counter state by decrementing the current count value by 1.
+
+The counter value is displayed in the UI using the {count} syntax within the <p> tag.
+
+To use this CounterApp component in your app, you can import and render it in your root component or any other appropriate component.
+
+Remember to have React and ReactDOM libraries properly set up in your project and to render the component within the HTML DOM using ReactDOM.render().
+
+Note: Make sure you have the required dependencies installed, such as React and ReactDOM, and that your project is properly set up with a build process (e.g., Babel and webpack) if necessary.
+
+9. Develop a **GitHub User Finder** web application using **React** The application should allow users to enter a **GitHub username** and display relevant information about the user, including their avatar and
+name. The design of the application should follow the layout provided in the image below.
+
+- Use Github Api to get User Data “https://api.github.com/users”.
+
+Sure! Here's an example of a GitHub User Finder web application using React:
+
+import React, { useState } from 'react';
+
+function GitHubUserFinder() {
+  const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState(null);
+
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`https://api.github.com/users/${username}`)
+      .then((response) => response.json())
+      .then((data) => setUserData(data))
+      .catch((error) => console.log(error));
+  };
+
+  return (
+    <div>
+      <h1>GitHub User Finder</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={handleChange}
+        />
+        <button type="submit">Search</button>
+      </form>
+      {userData && (
+        <div>
+          <img src={userData.avatar_url} alt="User Avatar" />
+          <h2>{userData.name}</h2>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default GitHubUserFinder;
+In this example, we define a functional component called GitHubUserFinder. It uses the useState hook to manage the username input value and the userData state, which holds the data fetched from the GitHub API.
+
+The handleChange function is called whenever the input field's value changes, updating the username state accordingly.
+
+The handleSubmit function is called when the form is submitted. It fetches the user data from the GitHub API using the entered username. If the fetch is successful, the fetched data is stored in the userData 
+state using the setUserData function.
+
+In the return statement, we render a form with an input field and a search button. The input field's value is bound to the username state, and its onChange event is handled by the handleChange function. When
+ the form is submitted, the handleSubmit function is called.
+
+If userData is not null (i.e., the user data has been fetched), we render the user's avatar and name using the userData object.
+
+To use this GitHubUserFinder component in your app, you can import and render it in your root component or any other appropriate component.
+
+Remember to have React and ReactDOM libraries properly set up in your project and to render the component within the HTML DOM using ReactDOM.render().
+
+Note: Make sure you have the required dependencies installed, such as React and ReactDOM, and that your project is properly set up with a build process (e.g., Babel and webpack) if necessary.
+
+10. Develop a simple website using React, fetch and display products from the "https://fakestoreapi.com/products" API. The website should have the following features:
+
+- Fetch product data from the "https://fakestoreapi.com/products" API.
+- Display the products in a user-friendly UI.
+- Show **Three products** in a single row for optimal visibility and layout.
+- Use **React** to achieve the desired layout and functionality.
+- Ensure that the UI is visually appealing and responsive.
+- Implement error handling to handle any issues with API requests.
+- Test the website thoroughly to ensure proper functionality and performance.
+- Provide clear and concise documentation to guide users on how to interact with the website and understand its features.
+
+Sure! Here's an example of a simple website using React to fetch and display products from the "https://fakestoreapi.com/products" API:
+
+import React, { useState, useEffect } from 'react';
+
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <div>
+      <h1>Product List</h1>
+      <div className="product-grid">
+        {products.map((product) => (
+          <div key={product.id} className="product-card">
+            <img src={product.image} alt={product.title} />
+            <h2>{product.title}</h2>
+            <p>{product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default ProductList;
+In this example, we define a functional component called ProductList. It uses the useState and useEffect hooks to manage the state for products, loading status, and error handling.
+
+In the useEffect hook, we make a GET request to the API endpoint https://fakestoreapi.com/products to fetch the product data. If the request is successful, we update the products state with the received data. 
+ If there's an error, we update the error state. The loading state is set to false once the API call is completed.
+
+We handle three different scenarios in the return statement:
+
+If loading is true, we display a loading message.
+If error is not null, we display an error message.
+If neither loading nor error is true, we render the product list UI.
+In the UI, we map over the products state and display each product's image, title, and price in a card-like structure. The CSS classes product-grid and product-card can be used to style the layout.
+
+To use this ProductList component in your app, you can import and render it in your root component or any other appropriate component.
+
+Remember to have React and ReactDOM libraries properly set up in your project and to render the component within the HTML DOM using ReactDOM.render().
