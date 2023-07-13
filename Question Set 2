@@ -1,0 +1,594 @@
+1 What are hooks in react? how to identify hooks?
+
+Hooks are a feature introduced in React 16.8 that allows developers to use state and other React features without writing class components. Hooks provide a way to add state and lifecycle features to functional
+components, making them more powerful and flexible.
+
+Hooks can be identified by the following rules:
+
+Hooks start with the prefix "use". For example, useState, useEffect, useContext.
+Hooks are called directly within the functional component's body, not inside nested functions, conditions, or loops.
+Hooks are only called at the top level of the functional component or within other custom hooks.
+Here are some commonly used React hooks:
+
+useState: Allows you to add state to functional components. It returns an array with two elements: the current state value and a function to update the state.
+
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  // ...
+}
+useEffect: Allows you to perform side effects in functional components, such as fetching data or subscribing to events. It runs after rendering and on subsequent re-renders.
+
+import React, { useEffect } from 'react';
+
+function Example() {
+  useEffect(() => {
+    // Perform side effects here
+    // ...
+  }, []); // Dependency array to control when the effect should run
+}
+useContext: Allows you to access the value of a context in a functional component.
+
+import React, { useContext } from 'react';
+
+const MyContext = React.createContext();
+
+function MyComponent() {
+  const value = useContext(MyContext);
+  // ...
+}
+useRef: Allows you to create a mutable reference that persists across re-renders. It can be used to access DOM elements, store values, or preserve values between renders.
+
+import React, { useRef } from 'react';
+
+function MyComponent() {
+  const inputRef = useRef();
+  // ...
+}
+These are just a few examples of React hooks. There are additional hooks available, such as useReducer, useCallback, useMemo, and more. Hooks enable you to write reusable and more manageable code in functional
+components by encapsulating state, effects, and other functionalities within the component itself.
+
+2 Explain useState Hook & what can you achieve with it?
+
+The useState hook is a built-in hook in React that allows functional components to have state. It provides a way to add stateful behavior to functional components without the need for class components.
+
+The useState hook takes an initial state value as its argument and returns an array with two elements: the current state value and a function to update the state. The syntax for using useState is as follows:
+const [state, setState] = useState(initialState);
+Here's an example of using the useState hook to add a counter state to a functional component:
+
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+}
+In this example, the useState hook is used to declare a state variable called count with an initial value of 0. The setCount function is used to update the count state.
+
+With the useState hook, you can achieve the following:
+
+Add state to functional components: You can manage and update state within functional components, eliminating the need for class components.
+
+Manage complex state: useState can handle complex state objects or arrays, allowing you to store and update multiple pieces of state within a single component.
+
+Update state: The setCount function returned by useState allows you to update the state value. React will automatically re-render the component and update the UI when the state changes.
+
+Preserve state between renders: React ensures that the state value is preserved between renders, allowing you to maintain the current state even when the component re-renders.
+
+Encapsulate state within the component: Each component has its own isolated state, making it easier to reason about and manage the state within a specific component.
+
+The useState hook is a powerful tool for managing state in functional components and is widely used in React applications to add interactivity and dynamic behavior to the UI.
+
+3 How to pass data from one component to another component?
+
+In React, there are several ways to pass data from one component to another component. The method you choose depends on the component relationship and the complexity of the data being passed. Here are a few
+common approaches:
+
+Props (Parent to Child):
+
+In React, you can pass data from a parent component to a child component using props.
+
+Define the data in the parent component and pass it as a prop to the child component.
+
+The child component can access the passed data through its props.
+
+Example:
+
+// ParentComponent.js
+import React from 'react';
+import ChildComponent from './ChildComponent';
+
+function ParentComponent() {
+  const data = 'Hello, child component!';
+  return <ChildComponent message={data} />;
+}
+
+// ChildComponent.js
+import React from 'react';
+
+function ChildComponent(props) {
+  return <p>{props.message}</p>;
+}
+
+export default ChildComponent;
+Context API:
+
+The Context API is a built-in feature in React that allows you to share data across multiple components without passing it explicitly through props.
+
+Create a context using React.createContext() in a common parent component.
+
+Wrap the components that need access to the shared data with a context provider (Context.Provider) and pass the data as a value.
+
+Child components can access the shared data by using useContext hook or by consuming the context using Context.Consumer.
+
+Example:
+
+// DataContext.js
+import React from 'react';
+
+const DataContext = React.createContext();
+
+export default DataContext;
+
+// ParentComponent.js
+import React from 'react';
+import ChildComponent from './ChildComponent';
+import DataContext from './DataContext';
+
+function ParentComponent() {
+  const data = 'Hello, child component!';
+  return (
+    <DataContext.Provider value={data}>
+      <ChildComponent />
+    </DataContext.Provider>
+  );
+}
+
+// ChildComponent.js
+import React, { useContext } from 'react';
+import DataContext from './DataContext';
+
+function ChildComponent() {
+  const data = useContext(DataContext);
+  return <p>{data}</p>;
+}
+
+export default ChildComponent;
+State Management Libraries (e.g., Redux, MobX):
+
+State management libraries like Redux or MobX provide a centralized state management solution for React applications.
+They allow you to store and share data across components by maintaining a global state.
+Components can access the shared state using selectors or by connecting to the store.
+These libraries are more suitable for complex applications with large-scale state management needs.
+These are a few common methods to pass data between components in React. The approach you choose depends on the component relationship, the complexity of the data, and the specific requirements of your 
+application.
+
+4 What is the significance of the "key" prop in React lists, and why is it important to use it correctly?
+ChatGPT
+The "key" prop in React lists is a special attribute that helps React identify each item in a list uniquely. It is used to optimize the performance and reconciliation process when updating or re-rendering lists
+of components. The key prop is important to use correctly for the following reasons:
+
+Efficient Reconciliation: When updating a list, React uses the key prop to determine whether a list item has changed, been added, or removed. It helps React efficiently update the DOM by reusing existing 
+components instead of recreating them. Without a unique key, React may have to recreate the entire list on every update, leading to poor performance.
+
+Stable Component Identity: The key prop provides a stable identity for each item in the list. It helps React maintain component state, focus, and other attributes correctly when the list is re-rendered. Without 
+a key, React may lose track of component state and cause unexpected behavior.
+
+Performance Optimization: The key prop allows React to optimize the rendering and reordering of list items. When the key remains consistent across re-renders, React can compare the new list with the previous 
+one more efficiently and minimize unnecessary DOM manipulations.
+
+Preventing Rendering Issues: Using a unique key prop helps avoid rendering issues, such as duplicated or missing items in the list. It ensures that React can accurately determine the changes in the list and 
+update the UI accordingly.
+
+To use the key prop correctly:
+
+Keys should be unique: Each key in a list should be unique among its siblings. React uses the key to differentiate between list items, so it's crucial to provide a unique identifier for each item.
+
+Keys should be stable: The key should remain the same for an item even if its position or order changes within the list. Avoid using indexes as keys since they can lead to incorrect behavior when items are
+added, removed, or reordered.
+
+Use a unique identifier: Ideally, use a unique identifier from the data source (e.g., an ID field) as the key. If that's not available, you can generate a unique identifier using a library like uuid or use a
+combination of fields that ensure uniqueness.
+
+Example:
+
+function MyComponent() {
+  const items = [
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+  ];
+
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
+In this example, the key prop is set to the id field of each item. This ensures that each item has a unique identifier, allowing React to efficiently update the list when changes occur.
+
+Correctly using the key prop in React lists helps optimize performance, maintain component state, and prevent rendering issues, leading to a more efficient and reliable rendering of lists in React applications.
+
+5 What is the significance of using "setState" instead of modifying state directly in React?
+
+In React, it is important to use the setState method provided by the component to modify the state, rather than directly modifying the state object itself. Here's the significance of using setState:
+
+Triggering Component Re-render: When you use setState to update the state, React is notified that the state has changed, and it triggers a re-render of the component and its child components. React compares the 
+previous and updated state to determine what parts of the UI need to be updated, optimizing performance by minimizing unnecessary re-renders.
+
+Ensuring State Immutability: React relies on the concept of immutability for efficient change detection and reconciliation. When you directly modify the state object, React cannot detect the changes and may not
+update the UI correctly. By using setState, you ensure that React is aware of the state modifications and can handle them appropriately.
+
+Batched State Updates: When you call setState multiple times within the same event handler or lifecycle method, React batches the state updates together for better performance. This means that React will perform 
+a single re-render after applying all the state updates, rather than re-rendering after each individual state change.
+
+Handling Asynchronous Updates: State updates in React are asynchronous. When you call setState, React schedules the state update and may perform the actual update at a later time, potentially batching multiple 
+updates together. This allows React to optimize the rendering process. If you directly modify the state, you may bypass React's mechanisms and cause unexpected behavior or inconsistencies in your application.
+
+Triggering Lifecycle Methods: When you use setState, React ensures that the component's lifecycle methods, such as shouldComponentUpdate and componentDidUpdate, are called appropriately. These lifecycle methods
+are important for handling side effects, performing additional computations, or interacting with external APIs.
+
+By using setState in React, you adhere to React's principles and mechanisms for state management, ensuring efficient rendering, proper handling of state updates, and reliable component behavior. It helps React
+track and update the state correctly, leading to better performance, maintainability, and predictable behavior in your application.
+
+6 Explain the concept of React fragments and when you should use them.
+
+In React, fragments are a feature that allows you to group multiple JSX elements together without introducing an extra DOM node. Fragments are used to return multiple elements from a component's render method 
+without requiring a wrapper element. They provide a cleaner and more concise way to structure and organize your component's JSX.
+
+The concept of React fragments can be understood as follows:
+
+Wrapping JSX Elements: In React, when you return multiple JSX elements from a component's render method, they must be wrapped within a single parent element. This is because React requires a single root element 
+to render. However, sometimes you may not want to introduce an additional DOM element just for the purpose of wrapping the elements.
+
+Syntax and Usage: React fragments are denoted by the <React.Fragment> syntax or by using the shorthand syntax <>. You can place multiple JSX elements inside the fragment, as if they were wrapped by a single 
+parent element. For example:
+
+import React from 'react';
+
+function MyComponent() {
+  return (
+    <React.Fragment>
+      <h1>Heading 1</h1>
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+    </React.Fragment>
+  );
+}
+or using shorthand syntax:
+
+import React from 'react';
+
+function MyComponent() {
+  return (
+    <>
+      <h1>Heading 1</h1>
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+    </>
+  );
+}
+No Extra DOM Node: The purpose of using fragments is to avoid introducing an additional DOM node when rendering multiple elements. When using fragments, React will not create an extra <div> or any other wrapper
+element in the rendered output. Instead, the fragment elements are directly rendered as siblings.
+
+Key Attribute: When using fragments and mapping over arrays, you may need to provide a unique key attribute to each fragment element to help React efficiently update and re-render the elements when the array
+changes.
+
+You should use React fragments when:
+
+You need to return multiple JSX elements from a component's render method without introducing an extra DOM node.
+You want to avoid adding unnecessary wrapper elements just for the purpose of satisfying React's requirement of a single root element.
+You want to improve the readability and maintainability of your code by grouping elements logically without introducing additional nesting.
+Overall, React fragments are a convenient and cleaner way to structure your JSX code when you need to return multiple elements from a component without introducing unnecessary wrapper elements. They help improve
+the overall structure, readability, and maintainability of your components.
+
+7 How do you handle conditional rendering in React?
+
+In React, conditional rendering allows you to conditionally render different components or elements based on certain conditions or states. There are several ways to handle conditional rendering in React:
+
+If/Else Statements:
+
+You can use traditional JavaScript if/else statements inside the render method of your component to conditionally render different elements or components based on a condition.
+
+Example:
+
+render() {
+  if (condition) {
+    return <ComponentA />;
+  } else {
+    return <ComponentB />;
+  }
+}
+Ternary Operator:
+
+The ternary operator (? :) can be used to conditionally render different components or elements in a concise way.
+
+Example:
+
+render() {
+  return condition ? <ComponentA /> : <ComponentB />;
+}
+&& Operator:
+
+The && operator can be used to conditionally render a component or an element by evaluating a condition.
+
+Example:
+
+render() {
+  return condition && <ComponentA />;
+}
+Switch Statement:
+
+If you have multiple conditions to handle, you can use a switch statement to determine which component or element to render.
+
+Example:
+
+render() {
+  switch (value) {
+    case 'A':
+      return <ComponentA />;
+    case 'B':
+      return <ComponentB />;
+    default:
+      return <ComponentC />;
+  }
+}
+Rendering based on State or Props:
+
+You can conditionally render components or elements based on the state or props of your component.
+
+Example:
+
+render() {
+  const { isLoggedIn } = this.state;
+
+  return isLoggedIn ? <WelcomeUser /> : <LoginButton />;
+}
+Rendering Null or Empty Fragment:
+
+You can conditionally render null or an empty fragment (<>...</>) to indicate no rendering should occur based on a condition.
+
+Example:
+
+render() {
+  return condition ? <ComponentA /> : null;
+  // or
+  return condition ? <ComponentA /> : <></>;
+}
+These are some common ways to handle conditional rendering in React. The approach you choose depends on the specific requirements and complexity of your application. Select the method that best suits your needs
+to conditionally render components or elements based on your desired conditions or states.
+
+8.  Create a Simple Todo Web App with following features Using React :
+
+- An input button where users can type their tasks.
+- On clicking the submit button, the entered task should be displayed in the UI.
+The UI layout should resemble the image provided. https://pwskills.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd2144127-1975-4844-9ebd-fcbf44dc402f%2FUntitled.png?id=c4a675e7-2aa6-4ba7-81ec-48b0d47efc98&table=block&spaceId=6fae2e0f-dedc-48e9-bc59-af2654c78209&width=2000&userId=&cache=v2
+ChatGPT
+Certainly! Here's an example of a simple Todo web app using React:
+
+import React, { useState } from 'react';
+
+function TodoApp() {
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+  const handleChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (task.trim() !== '') {
+      setTasks([...tasks, task]);
+      setTask('');
+    }
+  };
+
+  return (
+    <div className="todo-app">
+      <h1>Todo App</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={task} onChange={handleChange} placeholder="Enter task" />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TodoApp;
+In this example, we define a functional component called TodoApp. It uses the useState hook to manage the task input value and the tasks state, which holds an array of entered tasks.
+
+The handleChange function is called whenever the input field's value changes, updating the task state accordingly.
+
+The handleSubmit function is called when the form is submitted. It adds the entered task to the tasks state if it's not empty. After adding the task, it clears the input field by setting the task state 
+to an empty string.
+
+In the return statement, we render the UI layout as described in the provided image. The input field's value is bound to the task state, and its onChange event is handled by the handleChange function. When
+the form is submitted, the handleSubmit function is called.
+
+The entered tasks are rendered as list items (<li>) within an unordered list (<ul>). Each task is assigned a unique key based on its index in the tasks array.
+
+To use this TodoApp component in your app, you can import and render it in your root component or any other appropriate component.
+
+Remember to have React and ReactDOM libraries properly set up in your project and to render the component within the HTML DOM using ReactDOM.render().
+
+Note: Make sure you have the required dependencies installed, such as React and ReactDOM, and that your project is properly set up with a build process (e.g., Babel and webpack) if necessary.
+
+9. Expand the existing todo web app with two additional functionalities:
+
+1. On clicking the "Update Status" button:
+    - Update the status of the task.
+    
+2. On clicking the "Remove Todo" button:
+    - Remove the selected todo from the UI.
+    - Ensure that the deleted todo is no longer visible in the todo list.
+
+To expand the existing Todo web app with the requested functionalities, you can modify the TodoApp component as follows:
+
+import React, { useState } from 'react';
+
+function TodoApp() {
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+  const handleChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (task.trim() !== '') {
+      setTasks([...tasks, { task, status: 'pending' }]);
+      setTask('');
+    }
+  };
+
+  const updateStatus = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].status = 'completed';
+    setTasks(updatedTasks);
+  };
+
+  const removeTodo = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
+  return (
+    <div className="todo-app">
+      <h1>Todo App</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={task} onChange={handleChange} placeholder="Enter task" />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            <span className={task.status === 'completed' ? 'completed' : ''}>{task.task}</span>
+            <div>
+              {task.status === 'pending' && (
+                <button onClick={() => updateStatus(index)}>Update Status</button>
+              )}
+              <button onClick={() => removeTodo(index)}>Remove Todo</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TodoApp;
+In this modified version, two new functionalities have been added: updating the status of a task and removing a todo from the UI.
+
+updateStatus Function:
+
+This function takes the index of the task in the tasks array and updates its status to "completed".
+It creates a copy of the tasks array using the spread operator, updates the status of the specific task, and sets the updated array using setTasks.
+removeTodo Function:
+
+This function takes the index of the task in the tasks array and removes it from the array.
+It creates a copy of the tasks array using the spread operator, removes the task at the specified index using the splice method, and sets the updated array using setTasks.
+In the JSX, two buttons are added to each todo item:
+
+The "Update Status" button is only rendered for tasks with a status of "pending". Clicking this button calls the updateStatus function with the corresponding task index.
+The "Remove Todo" button is always rendered and calls the removeTodo function with the corresponding task index when clicked.
+Additionally, a className is added to the task's <span> element to style the completed tasks differently by applying a CSS class.
+
+With these modifications, you can now update the status of tasks and remove todos from the UI by clicking the respective buttons.
+
+10 Build Calculator Web app using React.
+
+Sure! Here's an example of a simple calculator web app built using React:
+
+import React, { useState } from 'react';
+
+function Calculator() {
+  const [display, setDisplay] = useState('');
+
+  const handleClick = (value) => {
+    setDisplay((prevDisplay) => prevDisplay + value);
+  };
+
+  const handleClear = () => {
+    setDisplay('');
+  };
+
+  const handleEqual = () => {
+    try {
+      const result = eval(display);
+      setDisplay(result.toString());
+    } catch (error) {
+      setDisplay('Error');
+    }
+  };
+
+  return (
+    <div className="calculator">
+      <input type="text" value={display} readOnly />
+      <div className="buttons">
+        <button onClick={() => handleClick('7')}>7</button>
+        <button onClick={() => handleClick('8')}>8</button>
+        <button onClick={() => handleClick('9')}>9</button>
+        <button onClick={() => handleClick('+')}>+</button>
+        <button onClick={() => handleClick('4')}>4</button>
+        <button onClick={() => handleClick('5')}>5</button>
+        <button onClick={() => handleClick('6')}>6</button>
+        <button onClick={() => handleClick('-')}>-</button>
+        <button onClick={() => handleClick('1')}>1</button>
+        <button onClick={() => handleClick('2')}>2</button>
+        <button onClick={() => handleClick('3')}>3</button>
+        <button onClick={() => handleClick('*')}>*</button>
+        <button onClick={() => handleClick('0')}>0</button>
+        <button onClick={() => handleClick('.')}>.</button>
+        <button onClick={() => handleEqual()}>=</button>
+        <button onClick={() => handleClick('/')}>/</button>
+        <button onClick={() => handleClear()}>C</button>
+      </div>
+    </div>
+  );
+}
+
+export default Calculator;
+In this example, we define a functional component called Calculator. It uses the useState hook to manage the display state, which holds the current input and result.
+
+The handleClick function is called when a button is clicked. It concatenates the clicked value to the display state.
+
+The handleClear function is called when the "C" button is clicked. It clears the display state, resetting the calculator.
+
+The handleEqual function is called when the "=" button is clicked. It evaluates the expression in the display state using the eval function. The result is then set as the new value of the display state. If an 
+error occurs during evaluation, the display state is set to "Error".
+
+In the return statement, we render the calculator UI. The display state is bound to the input field's value, which is set to read-only.
+
+The buttons are rendered using JSX, and their click events are handled by calling the appropriate functions.
+
+To use this Calculator component in your app, you can import and render it in your root component or any other appropriate component.
+
+Remember to have React and ReactDOM libraries properly set up in your project and to render the component within the HTML DOM using ReactDOM.render().
+
+Note: The use of the eval function in this example is for simplicity. However, it's important to note that using eval with user-generated input can be unsafe. In a real-world scenario, you should consider
+implementing a safer and more controlled evaluation mechanism.
